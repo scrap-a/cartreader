@@ -551,6 +551,9 @@ void flashromCPS_SIMM4x8() {
    Setup
  *****************************************/
 void setup_CPS3() {
+  // Request 5V
+  setVoltage(VOLTS_SET_5V);
+  
   // Set Address Pins to Output
   //A0-A7
   DDRF = 0xFF;
@@ -598,6 +601,7 @@ void setup_CPS3() {
   }
 
   byteCtrl = 1;
+  delay(1);
 }
 
 /******************************************
@@ -1201,9 +1205,9 @@ void id_SIMM4x8() {
   uint8_t ngFlash = 0;
   uint8_t okFlash = 0;
   
-  flashid = flashids[7];
+  flashid = flashids[3];
   sprintf(flashid_str, "%04X", flashid);
-  for (byte i = 4; i < 8; i++) {
+  for (byte i = 0; i < 4; i++) {
     if (flashid == flashids[i])
       okFlash += 1;
     else
